@@ -11,6 +11,11 @@ echo "User ".$request->fd." connect\n";
 
   $server->on("message",function (swoole_websocket_server $server,$frame ){
   echo "User ".$frame->fd." send message ".$frame->data ." \n";
+      foreach ($server->connections as $fd) {
+      if ($frame->fd != $fd) {
+          $server->push($fd,$frame->data);
+      }
+      }
   });
 
   // close
