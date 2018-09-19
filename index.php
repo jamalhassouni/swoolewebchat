@@ -24,11 +24,6 @@
                 </div>
             </div>
 
-            <!--jquery -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-            <!-- Latest compiled and minified JavaScript -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
             <script>
                 var exampleSocket = new WebSocket("ws://localhost:8080");
 
@@ -36,11 +31,11 @@
                     console.log("user connected");
                 };
 
-                function sendMessage() {
+                 sendMessage = () => {
+                    let messageElem = document.getElementById('message');
+                    let textMessage = messageElem.value;
 
-                    var textMessage = $("#message").val();
-
-                    var msg = {
+                    let msg = {
                         type: "message",
                         text : textMessage,
                         date : Date.now()
@@ -48,7 +43,7 @@
 
                     exampleSocket.send(JSON.stringify(msg));
 
-                    $("#message").val('');
+                  messageElem.value = "";
 
                     messageParse(textMessage);
 
@@ -58,12 +53,12 @@
                     messageParse(JSON.parse(event.data).text)
                 }
 
-                function messageParse(text) {
-                    $('#messagebox').append('<p>'+text+'</p>');
+                 messageParse = (text) => {
+                  document.getElementById('messagebox').innerHTML += `<p>${text}</p>`;
                 }
 
 
             </script>
-          
+
         </body>
 </html>
