@@ -35,20 +35,20 @@ sendMessage = () => {
   let messageElem = document.getElementById("message");
   let textMessage = messageElem.value;
 
-   if(textMessage.trim() !== ""){
+  if (textMessage.trim() !== "") {
     let msg = {
       type: "message",
       text: textMessage,
       sender: Name,
       date: Date.now()
     };
-  
+
     exampleSocket.send(JSON.stringify(msg));
-  
+
     messageElem.value = "";
-  
+
     messageParse(Name, textMessage);
-   }
+  }
 };
 
 exampleSocket.onmessage = function(event) {
